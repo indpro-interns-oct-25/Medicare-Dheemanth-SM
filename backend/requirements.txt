@@ -1,0 +1,23 @@
+# Django Core
+Django==5.1.4
+
+# Django REST Framework
+djangorestframework==3.15.2
+djangorestframework-simplejwt==5.3.1
+
+# CORS Support
+django-cors-headers==4.6.0
+
+# Environment Variables
+python-decouple==3.8
+
+# Database Drivers
+psycopg2-binary==2.9.10  # PostgreSQL
+# mysqlclient==2.2.0  # Uncomment for MySQL
+
+# Production Server (Uncomment for production)
+# gunicorn==21.2.0
+# whitenoise==6.6.0  # For serving static files
+
+# Optional: For better performance
+# django-redis==5.4.0  # Redis cache backend

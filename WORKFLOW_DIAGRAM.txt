@@ -1,0 +1,349 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║            PATIENT REGISTRATION & VERIFICATION WORKFLOW                  ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          COMPLETE USER JOURNEY                          │
+└─────────────────────────────────────────────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  STEP 1: PATIENT DISCOVERY
+  ══════════════════════════
+
+     🌐 Landing Page (http://localhost:3000)
+         │
+         ├──> [Register as Patient] Button
+         │
+         └──> [Staff Login] Button
+         
+         Patient clicks "Register as Patient"
+         │
+         ▼
+     
+  STEP 2: PATIENT REGISTRATION
+  ═════════════════════════════
+
+     📝 Registration Form (/register)
+     ┌────────────────────────────────────┐
+     │  First Name:     [John      ]      │
+     │  Last Name:      [Doe       ]      │
+     │  Email:          [john@ex...]      │
+     │  Phone:          [+1234567890]     │
+     │  Password:       [•••••••••] 👁️   │
+     │  Confirm:        [•••••••••] 👁️   │
+     │                                    │
+     │     [✨ Create Account]            │
+     └────────────────────────────────────┘
+                    │
+                    │ Submit
+                    ▼
+     
+     🔧 Backend Processing
+     ┌────────────────────────────────────┐
+     │ 1. Validate form data              │
+     │ 2. Check duplicate email           │
+     │ 3. Create User (is_verified=False)│
+     │ 4. Hash password                   │
+     │ 5. Create Notification for Admin  │
+     └────────────────────────────────────┘
+                    │
+                    ▼
+     
+     ✅ Success Message
+     "Registration successful! Your account is pending
+      admin verification. You will be able to login
+      once approved."
+                    │
+                    │ Auto-redirect after 3s
+                    ▼
+     🔐 Login Page (/login)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  STEP 3: PATIENT TRIES TO LOGIN (BEFORE VERIFICATION)
+  ═════════════════════════════════════════════════════
+
+     🔐 Login Page
+     ┌────────────────────────────────────┐
+     │  Email:    [john@example.com]      │
+     │  Password: [•••••••••]             │
+     │                                    │
+     │  [🔒 Staff Login]                  │
+     └────────────────────────────────────┘
+                    │
+                    │ Submit
+                    ▼
+     
+     🔧 Backend Check
+     ┌────────────────────────────────────┐
+     │ 1. Verify email exists             │
+     │ 2. Verify password correct         │
+     │ 3. Check user.role = 'patient'     │
+     │ 4. Check user.is_verified = False  │
+     │ 5. ❌ REJECT LOGIN                 │
+     └────────────────────────────────────┘
+                    │
+                    ▼
+     
+     ❌ Error Message
+     "Your account is pending verification by an
+      administrator. Please wait for approval."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  STEP 4: ADMIN SEES NOTIFICATION
+  ════════════════════════════════
+
+     👨‍💼 Admin Logs In
+     (admin@medicare.com / admin123)
+                    │
+                    ▼
+     
+     📊 Admin Dashboard
+     ┌────────────────────────────────────────┐
+     │  Admin Dashboard          🔔(1) 👤     │
+     │                            ▲           │
+     │                            │           │
+     │                      Red Badge!        │
+     └────────────────────────────────────────┘
+     
+     Admin clicks the bell 🔔
+                    │
+                    ▼
+     
+     📬 Notifications Dropdown
+     ┌─────────────────────────────────────┐
+     │  Notifications               ✕      │
+     ├─────────────────────────────────────┤
+     │  📋 New Patient Registration        │
+     │                                     │
+     │  John Doe (john@example.com)        │
+     │  has registered and is awaiting     │
+     │  verification.                      │
+     │                                     │
+     │  Nov 11, 2025                       │
+     │                                     │
+     │  [✓ Approve]  [✕ Reject]           │
+     └─────────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  STEP 5A: ADMIN APPROVES PATIENT
+  ════════════════════════════════
+
+     Admin clicks [✓ Approve]
+                    │
+                    ▼
+     
+     🔧 Backend Processing
+     ┌────────────────────────────────────┐
+     │ 1. Get user by ID                  │
+     │ 2. Set user.is_verified = True     │
+     │ 3. Save user                       │
+     │ 4. Mark notification as read       │
+     └────────────────────────────────────┘
+                    │
+                    ▼
+     
+     ✅ Success Alert
+     "Patient John Doe has been verified
+      and can now login"
+                    │
+                    ▼
+     
+     🔄 Auto-refresh Dashboard
+     - Badge count decreases
+     - Notification marked as read
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  STEP 5B: ADMIN REJECTS PATIENT (ALTERNATIVE)
+  ═════════════════════════════════════════════
+
+     Admin clicks [✕ Reject]
+                    │
+                    ▼
+     
+     🔧 Backend Processing
+     ┌────────────────────────────────────┐
+     │ 1. Get user by ID                  │
+     │ 2. Delete user account             │
+     │ 3. Mark notification as read       │
+     └────────────────────────────────────┘
+                    │
+                    ▼
+     
+     ✅ Success Alert
+     "Patient registration has been rejected"
+                    │
+                    ▼
+     
+     🔄 Auto-refresh Dashboard
+     - Badge count decreases
+     - Notification removed
+     
+     ⚠️ Patient can no longer login with those credentials
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  STEP 6: PATIENT LOGS IN (AFTER APPROVAL)
+  ═════════════════════════════════════════
+
+     🔐 Login Page
+     ┌────────────────────────────────────┐
+     │  Email:    [john@example.com]      │
+     │  Password: [•••••••••]             │
+     │                                    │
+     │  [🔒 Staff Login]                  │
+     └────────────────────────────────────┘
+                    │
+                    │ Submit
+                    ▼
+     
+     🔧 Backend Check
+     ┌────────────────────────────────────┐
+     │ 1. Verify email exists             │
+     │ 2. Verify password correct         │
+     │ 3. Check user.role = 'patient'     │
+     │ 4. Check user.is_verified = True ✅│
+     │ 5. Generate JWT tokens             │
+     │ 6. ✅ ALLOW LOGIN                  │
+     └────────────────────────────────────┘
+                    │
+                    ▼
+     
+     🔄 Auto-redirect to /patient/dashboard
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  STEP 7: PATIENT DASHBOARD
+  ══════════════════════════
+
+     💙 Patient Dashboard
+     ┌───────────┬─────────────────────────────────────┐
+     │           │  Welcome back, John Doe!            │
+     │  💙       │  Here's your health overview        │
+     │  MediCare │                                      │
+     │           │  ╔════════════════════════════════╗ │
+     │  📊 Dashb.│  ║ 👤 Patient Information        ║ │
+     │  📅 Appts │  ║ Patient ID: P001               ║ │
+     │  📋 Record│  ║ Email: john@example.com        ║ │
+     │  👨‍⚕️ Doctor│  ║ Phone: +1234567890             ║ │
+     │  ⚙️ Settin│  ║ Doctor: Dr. Sarah Wilson       ║ │
+     │           │  ╚════════════════════════════════╝ │
+     │  🚪 Logout│                                      │
+     │           │  ╔════════════════════════════════╗ │
+     │           │  ║ 📅 My Appointments             ║ │
+     │           │  ║                                ║ │
+     │           │  ║ • Dr. Wilson - Nov 15, 10:00AM ║ │
+     │           │  ║   Status: Scheduled            ║ │
+     │           │  ║                                ║ │
+     │           │  ║ • Dr. Smith - Nov 20, 2:00PM   ║ │
+     │           │  ║   Status: Confirmed            ║ │
+     │           │  ╚════════════════════════════════╝ │
+     │           │                                      │
+     │           │  ╔════════════════════════════════╗ │
+     │           │  ║ 📋 Medical Records             ║ │
+     │           │  ║                                ║ │
+     │           │  ║ [Lab Report] Dr. Wilson        ║ │
+     │           │  ║ Blood test results normal      ║ │
+     │           │  ║ Completed - Nov 10, 2025       ║ │
+     │           │  ║                                ║ │
+     │           │  ║ [Prescription] Dr. Smith       ║ │
+     │           │  ║ Medication prescribed for...   ║ │
+     │           │  ║ Completed - Nov 5, 2025        ║ │
+     │           │  ╚════════════════════════════════╝ │
+     └───────────┴─────────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         DATABASE FLOW DIAGRAM                           │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  Patient Registers:
+  ┌─────────────────┐
+  │ User Created    │
+  ├─────────────────┤
+  │ username: john1 │
+  │ email: john@... │
+  │ role: patient   │
+  │ is_verified: ❌ │ ← KEY FIELD!
+  └─────────────────┘
+          │
+          │ Creates
+          ▼
+  ┌─────────────────────────────────┐
+  │ Notification Created            │
+  ├─────────────────────────────────┤
+  │ type: patient_registration      │
+  │ title: New Patient Registration │
+  │ message: John Doe has...        │
+  │ user_id: → User.id              │
+  │ is_read: ❌                      │
+  └─────────────────────────────────┘
+
+  Admin Approves:
+  ┌─────────────────┐
+  │ User Updated    │
+  ├─────────────────┤
+  │ is_verified: ✅ │ ← CHANGED!
+  └─────────────────┘
+          │
+          ▼
+  ┌─────────────────────────────────┐
+  │ Notification Updated            │
+  ├─────────────────────────────────┤
+  │ is_read: ✅                      │ ← CHANGED!
+  └─────────────────────────────────┘
+
+  Patient Can Now:
+  ┌─────────────────────────────────┐
+  │ ✅ Login successfully            │
+  │ ✅ Access patient dashboard      │
+  │ ✅ View appointments             │
+  │ ✅ View medical records          │
+  └─────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         AUTHENTICATION FLOW                             │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  Login Request
+      │
+      ▼
+  ┌─────────────────────┐
+  │ Check Credentials   │
+  │ Email + Password    │
+  └──────────┬──────────┘
+             │
+             ├──> ❌ Invalid? → Error Message
+             │
+             ▼
+  ┌─────────────────────┐
+  │ Check User Role     │
+  └──────────┬──────────┘
+             │
+             ├──> Admin → /dashboard
+             │
+             ├──> Doctor → /doctor/dashboard
+             │
+             ├──> Receptionist → /receptionist/appointments
+             │
+             └──> Patient?
+                      │
+                      ▼
+           ┌──────────────────────┐
+           │ Check is_verified    │
+           └──────────┬───────────┘
+                      │
+                      ├──> ❌ False? → "Pending verification"
+                      │
+                      └──> ✅ True? → /patient/dashboard
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  🎉 COMPLETE WORKFLOW VISUALIZATION - END 🎉

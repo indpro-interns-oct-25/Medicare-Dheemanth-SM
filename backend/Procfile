@@ -1,0 +1,2 @@
+web: gunicorn backend.wsgi --log-file - --workers 3 --timeout 120
+release: python manage.py migrate --noinput && python manage.py collectstatic --noinput
