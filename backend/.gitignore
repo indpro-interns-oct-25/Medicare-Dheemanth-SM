@@ -24,7 +24,7 @@ ENV/
 
 # Django
 *.log
-logs/
+logs/*.log
 db.sqlite3
 db.sqlite3-journal
 media/
@@ -59,3 +59,9 @@ dist/
 build/
 *.egg-info/
 *.egg
+
+# Sample data scripts with sensitive info (DO NOT COMMIT)
+add_sample_*.py
+*_sample_data.py
+seed_data.py
+assign_to_*.py
