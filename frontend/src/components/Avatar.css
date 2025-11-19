@@ -1,0 +1,56 @@
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Size variants */
+.avatar-small {
+  width: 32px;
+  height: 32px;
+  font-size: 0.75rem;
+}
+
+.avatar-medium {
+  width: 40px;
+  height: 40px;
+  font-size: 0.95rem;
+}
+
+.avatar-large {
+  width: 48px;
+  height: 48px;
+  font-size: 1.1rem;
+}
+
+.avatar-xlarge {
+  width: 64px;
+  height: 64px;
+  font-size: 1.5rem;
+}
+
+.avatar-xxlarge {
+  width: 80px;
+  height: 80px;
+  font-size: 1.75rem;
+}
+
+/* Doctor card avatar - larger size */
+.doctor-avatar .avatar {
+  width: 80px;
+  height: 80px;
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}

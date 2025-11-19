@@ -1,0 +1,470 @@
+.medical-records-page-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: #F5F7FA;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 20px;
+}
+
+/* Sidebar */
+.medical-records-page-wrapper .sidebar {
+  width: 260px;
+  background: white;
+  border-right: 1px solid #E5E7EB;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+}
+
+.medical-records-page-wrapper .sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.medical-records-page-wrapper .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.medical-records-page-wrapper .logo-icon {
+  font-size: 2rem;
+}
+
+.medical-records-page-wrapper .logo-text h3 {
+  font-size: 1.4rem;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.medical-records-page-wrapper .logo-text p {
+  font-size: 1rem;
+  color: #999;
+  margin: 0;
+}
+
+.medical-records-page-wrapper .sidebar-nav {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.medical-records-page-wrapper .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  color: #666;
+  text-decoration: none;
+  transition: all 0.2s;
+  font-weight: 500;
+  font-size: 1.15rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-align: left;
+}
+
+.medical-records-page-wrapper .nav-item:hover {
+  background: #F3F4F6;
+  color: #5B73E8;
+}
+
+.medical-records-page-wrapper .nav-item.active {
+  background: #EEF2FF;
+  color: #5B73E8;
+  border-left: 3px solid #5B73E8;
+}
+
+.medical-records-page-wrapper .nav-icon {
+  font-size: 1.5rem;
+}
+
+.medical-records-page-wrapper .sidebar-footer {
+  padding: 1rem;
+  border-top: 1px solid #E5E7EB;
+}
+
+.medical-records-page-wrapper .logout-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: #FEE2E2;
+  color: #DC2626;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.15rem;
+  transition: all 0.2s;
+}
+
+.medical-records-page-wrapper .logout-btn:hover {
+  background: #FCA5A5;
+}
+
+/* Main Content */
+.medical-records-page-wrapper .main-content {
+  margin-left: 260px;
+  flex: 1;
+  padding: 2rem;
+}
+
+.medical-records-page-wrapper .dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.medical-records-page-wrapper .dashboard-header h1 {
+  font-size: 2.5rem;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.medical-records-page-wrapper .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.medical-records-page-wrapper .notification-icon {
+  position: relative;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.medical-records-page-wrapper .notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #EF4444;
+  color: white;
+  font-size: 0.7rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.medical-records-page-wrapper .user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.medical-records-page-wrapper .profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.medical-records-page-wrapper .profile-name {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.medical-records-page-wrapper .dropdown-icon {
+  color: #999;
+  font-size: 0.75rem;
+}
+
+/* Page Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.page-header p {
+  color: #666;
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.btn-upload-record {
+  background: #5B73E8;
+  color: white;
+  border: none;
+  padding: 0.875rem 1.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-upload-record:hover {
+  background: #4A5FC8;
+  transform: translateY(-1px);
+}
+
+/* Search and Filters */
+.search-filters {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 250px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  font-size: 1.25rem;
+  color: #999;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  font-size: 1.15rem;
+  outline: none;
+}
+
+.search-box input:focus {
+  border-color: #5B73E8;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-group label {
+  font-size: 1.05rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.date-range {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.date-range input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  outline: none;
+  min-width: 150px;
+}
+
+.date-range input:focus {
+  border-color: #5B73E8;
+}
+
+.filter-group select {
+  padding: 0.75rem 1rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  background: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  outline: none;
+  min-width: 150px;
+}
+
+.filter-group select:focus {
+  border-color: #5B73E8;
+}
+
+.btn-clear-filters {
+  background: #F3F4F6;
+  color: #666;
+  border: 1px solid #E5E7EB;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-clear-filters:hover {
+  background: #E5E7EB;
+  color: #5B73E8;
+}
+
+/* Records Section */
+.records-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.records-section h2 {
+  font-size: 1.6rem;
+  color: #1a1a1a;
+  margin: 0 0 1.5rem 0;
+}
+
+/* Records Table */
+.records-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.records-table thead {
+  background: #F9FAFB;
+}
+
+.records-table th {
+  text-align: left;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.records-table td {
+  padding: 1rem;
+  border-top: 1px solid #F3F4F6;
+  font-size: 1.25rem;
+}
+
+.records-table tbody tr {
+  transition: background 0.2s;
+}
+
+.records-table tbody tr:hover {
+  background: #F9FAFB;
+}
+
+.record-id {
+  color: #5B73E8;
+  font-weight: 600;
+}
+
+.patient-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.patient-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.record-badge {
+  padding: 0.375rem 0.875rem;
+  border-radius: 20px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.record-badge.diagnosis {
+  background: #DBEAFE;
+  color: #2563EB;
+}
+
+.record-badge.lab-report {
+  background: #D1FAE5;
+  color: #059669;
+}
+
+.record-badge.prescription {
+  background: #FCE7F3;
+  color: #DB2777;
+}
+
+.record-badge.imaging {
+  background: #FEF3C7;
+  color: #D97706;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.action-btn {
+  background: #F3F4F6;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn:hover {
+  background: #5B73E8;
+  color: white;
+  transform: scale(1.1);
+}
+
+.action-btn.view:hover {
+  background: #10B981;
+}
+
+.action-btn.download:hover {
+  background: #5B73E8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .medical-records-page-wrapper .sidebar {
+    width: 70px;
+  }
+
+  .medical-records-page-wrapper .logo-text,
+  .medical-records-page-wrapper .nav-item span:not(.nav-icon),
+  .medical-records-page-wrapper .logout-btn span:not(.nav-icon) {
+    display: none;
+  }
+
+  .medical-records-page-wrapper .main-content {
+    margin-left: 70px;
+  }
+
+  .search-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .date-range {
+    flex-direction: column;
+  }
+}
